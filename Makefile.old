@@ -1,0 +1,17 @@
+PROJECT := cympfh-sample
+DOCKER_TAG_FRONT := asia.gcr.io/$(PROJECT)/streamlit-image:latest
+DOCKER_TAG_BACK := asia.gcr.io/$(PROJECT)/fastapi-image:latest
+
+all: build-frontend build-backend push-frontend push-backend
+
+build-frontend:
+	docker build -f frontend/Dockerfile -t $(DOCKER_TAG_FRONT) frontend/
+
+build-backend:
+	docker build -f backend/Dockerfile -t $(DOCKER_TAG_BACK) backend/
+
+push-frontend:
+	docker push $(DOCKER_TAG_FRONT)
+
+push-backend:
+	docker push $(DOCKER_TAG_BACK)
